@@ -1,0 +1,97 @@
+body {
+  min-height: 75rem; /* Can be removed; just added for demo purposes */
+}
+
+a{
+  color:#eb1c24;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #eb1c24;
+    border-color: #eb1c24;
+}
+
+.right-nav li {
+  font-size:24px;
+}
+.bg-inverse{
+  background-color: #000!important;
+}
+
+.navbar {
+  margin-bottom: 0;
+}
+
+.jumbotron {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  margin-bottom: 0;
+  background-color: #000;
+  color: #ccc;
+  border-radius: 0px;
+}
+
+section{
+  padding: 20px;
+}
+
+#stats{
+  padding: 30px;
+  background-color: #f7f7f7;
+  
+}
+
+#stats .fa{
+  font-size: 40px;
+}
+
+#stats .counter{
+  display: block;
+  font-size: 43px;
+  font-weight: 900;
+  line-height: 1;
+  margin: 15px 0 0;
+}
+
+#stats em{
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 1px;
+  font-style: normal;
+}
+
+#games-album {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background-color: #f7f7f7;
+}
+
+.card {
+  float: left;
+  width: 33.333%;
+  padding: .75rem;
+  margin-bottom: 2rem;
+  border: 0;
+}
+
+.card > img {
+  margin-bottom: .75rem;
+}
+
+.card-text {
+  font-size: 85%;
+}
+
+#roadmap{
+  background-color: #f7f7f7;
+}
+
+footer {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+footer p {
+  margin-bottom: .25rem;
+}
