@@ -65,14 +65,14 @@
 
     <section class="jumbotron text-center">
       <div class="container" style="color:#ddd">
-        <img src="biglogo.jpg" width="400" title="BetKing Logo" />
+        <img class="bklogo" src="biglogo.jpg" width="400" title="BetKing Logo" />
         <br>
         <br>
         <h1>Join the <span style="color:#eb1c24">ICO</span> of the casino that profited 7400 Bitcoin!</h1>
         <br>
         <h2 style="color:#eb1c24">August 7th</h2>
         <br/>
-        <p>
+        <p class="text-center">
           <a href="#ico" class="btn btn-primary">Click for details</a>
         </p>
       </div>
@@ -119,22 +119,22 @@
           <h3 class="text-center">BetKing stats from Sept 2014 to Dec 2016</h3>
           <br>
         <div class="row">
-          <div class="col-3 md-col-6" style="color:#eb1c24">
+          <div class="col-12 col-md-3 col-sm-6 col-xs-12" style="color:#eb1c24">
             <i class="fa fa-bitcoin"></i>
             <span class="counter" >7391</span>
             <em>BTC Profit</em>
           </div>
-          <div class="col-3 md-col-6">
+          <div class="col-12 col-md-3 col-sm-6 col-xs-12">
             <i class="fa fa-play"></i>
             <span class="counter">361</span>
             <em>Million Bets</em>
           </div>
-          <div class="col-3 md-col-6" style="color:#eb1c24">
+          <div class="col-12 col-md-3 col-sm-6 col-xs-12" style="color:#eb1c24">
             <i class="fa fa-line-chart"></i>
             <span class="counter">400k</span>
             <em>BTC Wagered</em>
           </div>
-          <div class="col-3 md-col-6">
+          <div class="col-12 col-md-3 col-sm-6 col-xs-12">
             <i class="fa fa-bank"></i>
             <span class="counter">6000</span>
             <em>BTC Invested</em>
@@ -241,12 +241,15 @@
     <script src="bootstrap.js"></script>
     <script src="ie10-viewport-bug-workaround.js"></script>
     <script type="text/javascript">
-      $( document ).ready(function() {
-        $(".nav-link").click(function() {
-          if ($( "#navbarCollapse" ).hasClass( "show" )) {
-            $("#navbar-toggler").click();
-          }
-        });
+      $( document ).ready(function () {
+        function closeNavBarOnClick () {
+          $(".nav-link").click(function () {
+            if ($("#navbarCollapse").hasClass("show")) {
+              $("#navbar-toggler").click();
+            }
+          });
+        }
+        closeNavBarOnClick();
       });
     </script>
   
