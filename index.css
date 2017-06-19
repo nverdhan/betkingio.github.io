@@ -98,6 +98,10 @@ section p {
   font-style: normal;
 }
 
+.stats-row .col-md-3, .stats-row .col-sm-6 {
+  padding: 15px;
+}
+
 #games-album {
   padding-top: 1rem;
   padding-bottom: 1rem;
