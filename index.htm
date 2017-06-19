@@ -14,7 +14,7 @@
   </head>
   <body>
   <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler navbar-toggler-right" id="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -59,25 +59,17 @@
         </div>
       </div>
     </nav>
-    <div class="navbar navbar-inverse bg-inverse">
-      <div class="container d-flex justify-content-between">
-        <a href="#" class="navbar-brand"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      </div>
-    </div>
 
     <section class="jumbotron text-center">
       <div class="container" style="color:#ddd">
-        <img src="biglogo.jpg" width="400" title="BetKing Logo" />
+        <img class="bklogo" src="biglogo.jpg" width="400" title="BetKing Logo" />
         <br>
         <br>
         <h1>Join the <span style="color:#eb1c24">ICO</span> of the casino that profited 7400 Bitcoin!</h1>
         <br>
         <h2 style="color:#eb1c24">August 7th</h2>
         <br/>
-        <p>
+        <p class="text-center">
           <a href="#ico" class="btn btn-primary">Click for details</a>
         </p>
       </div>
@@ -123,23 +115,23 @@
       <div class="container">
           <h3 class="text-center">BetKing stats from Sept 2014 to Dec 2016</h3>
           <br>
-        <div class="row">
-          <div class="col-3 md-col-6" style="color:#eb1c24">
+        <div class="row stats-row">
+          <div class="col-12 col-md-3 col-sm-6" style="color:#eb1c24">
             <i class="fa fa-bitcoin"></i>
             <span class="counter" >7391</span>
             <em>BTC Profit</em>
           </div>
-          <div class="col-3 md-col-6">
+          <div class="col-12 col-md-3 col-sm-6">
             <i class="fa fa-play"></i>
             <span class="counter">361</span>
             <em>Million Bets</em>
           </div>
-          <div class="col-3 md-col-6" style="color:#eb1c24">
+          <div class="col-12 col-md-3 col-sm-6" style="color:#eb1c24">
             <i class="fa fa-line-chart"></i>
             <span class="counter">400k</span>
             <em>BTC Wagered</em>
           </div>
-          <div class="col-3 md-col-6">
+          <div class="col-12 col-md-3 col-sm-6">
             <i class="fa fa-bank"></i>
             <span class="counter">6000</span>
             <em>BTC Invested</em>
@@ -247,6 +239,18 @@
     </script>
     <script src="bootstrap.js"></script>
     <script src="ie10-viewport-bug-workaround.js"></script>
+    <script type="text/javascript">
+      $( document ).ready(function () {
+        function closeNavBarOnClick () {
+          $(".nav-link").click(function () {
+            if ($("#navbarCollapse").hasClass("show")) {
+              $("#navbar-toggler").click();
+            }
+          });
+        }
+        closeNavBarOnClick();
+      });
+    </script>
   
   <script>
   (function (w,i,d,g,e,t,s) {w[d] = w[d]||[];t= i.createElement(g);

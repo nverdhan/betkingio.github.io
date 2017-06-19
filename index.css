@@ -5,6 +5,7 @@ body {
 a{
   color:#eb1c24;
 }
+
 .btn-primary {
     color: #fff;
     background-color: #eb1c24;
@@ -14,12 +15,14 @@ a{
 .right-nav li {
   font-size:24px;
 }
+
 .bg-inverse{
   background-color: #000!important;
 }
 
 .navbar {
   margin-bottom: 0;
+  min-height: 64px;
 }
 
 h4{
@@ -34,12 +37,39 @@ h4{
   color: #ccc;
   border-radius: 0px;
 }
+.bklogo {
+  max-width: 400px;
+  width: 100%;
+}
 
-section{
+section {
   padding-top: 40px;
   padding-bottom: 30px;
   padding-left: 10px;
   padding-right: 10px;
+  position: relative;
+  border-top: 66px solid transparent;
+  margin: -30px 0 0;
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+}
+
+section:before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 0;
+  right: 0;
+  border-top: 2px solid transparent;
+}
+
+section p {
+  text-align: justify;
+}
+
+#roadmap p {
+  text-align: center;
 }
 
 #stats{
@@ -66,6 +96,10 @@ section{
   font-size: 16px;
   letter-spacing: 1px;
   font-style: normal;
+}
+
+.stats-row .col-md-3, .stats-row .col-sm-6 {
+  padding: 15px;
 }
 
 #games-album {
