@@ -14,7 +14,7 @@
   </head>
   <body>
   <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler navbar-toggler-right" id="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -62,14 +62,6 @@
         </div>
       </div>
     </nav>
-    <div class="navbar navbar-inverse bg-inverse">
-      <div class="container d-flex justify-content-between">
-        <a href="#" class="navbar-brand"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      </div>
-    </div>
 
     <section class="jumbotron text-center">
       <div class="container" style="color:#ddd">
@@ -248,6 +240,15 @@
     </script>
     <script src="bootstrap.js"></script>
     <script src="ie10-viewport-bug-workaround.js"></script>
+    <script type="text/javascript">
+      $( document ).ready(function() {
+        $(".nav-link").click(function() {
+          if ($( "#navbarCollapse" ).hasClass( "show" )) {
+            $("#navbar-toggler").click();
+          }
+        });
+      });
+    </script>
   
 
 <svg xmlns="http://www.w3.org/2000/svg" width="356" height="280" viewBox="0 0 356 280" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="18" style="font-weight:bold;font-size:18pt;font-family:Arial, Helvetica, Open Sans, sans-serif">356x280</text></svg></body></html>
