@@ -78,6 +78,19 @@ section p {
   
 }
 
+#blog{
+  padding: 30px;
+  background-color: #f7f7f7;
+  
+}
+
+
+#translations{
+  padding: 30px;
+  background-color: #f7f7f7;
+  
+}
+
 #stats .fa{
   font-size: 40px;
 }
