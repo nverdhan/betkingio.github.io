@@ -73,7 +73,7 @@
         <br>
         <h1>Join the <span style="color:#eb1c24">ICO</span> of the casino that profited 7400 Bitcoin!</h1>
         <br>
-        <h2 style="color:#eb1c24">August 7th</h2>
+        <h2 id="timer"></h2>
         <br/>
         <p class="text-center">
           <a href="#ico" class="btn btn-primary">Click for details</a>
@@ -323,7 +323,7 @@
           </div>
           <div class="col-lg-3 col-md-4 col-xs-6 thumb">
             <a class="thumbnail" href="#">
-                <a href="http://thebitcoinpodcast.com/betking-relaunch-ico-crowdsale/"><img src="bitcoinpod.PNG" title="The Bitcoin Podcast" /></a>
+                <a href="http://thebitcoinpodcast.com/betking-ico-raises-over-1200000-in-pre-sale/"><img src="bitcoinpod.PNG" title="The Bitcoin Podcast" /></a>
             </a>
           </div>
 
@@ -407,6 +407,23 @@
       </div>
     </footer>
 
+    <script type="text/javascript">
+  var CONSTANTS = {
+    icoStartDate: new Date(new Date(Date.UTC(2017, 7, 7, 0, 0, 0))).getTime(),
+    BTC: 372.2790707,
+    ETH: 725.2345233
+  }
+  var currencies = [
+    {value: 0, symbol: '฿', code: 'BTC'},
+    {value: 1, symbol: 'E', code: 'ETH'},
+    {value: 2, symbol: 'D', code: 'DASH'},
+    {value: 3, symbol: 'L', code: 'LTC'},
+    {value: 4, symbol: 'M', code: 'XMR'},
+    {value: 5, symbol: 'F', code: 'FREE'},
+  ];
+</script>
+
+
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -429,6 +446,70 @@
     <script src="bootstrap.js"></script>
     <script src="ie10-viewport-bug-workaround.js"></script>
     <script type="text/javascript">
+
+(function () {
+        var fetchCurrencyRates = function (done) {
+          var xhr = new XMLHttpRequest();
+          xhr.onreadystatechange = function() {
+              if (xhr.readyState == XMLHttpRequest.DONE) {
+                var exchangeRates = JSON.parse(xhr.responseText);
+                if (typeof done === 'function') done(exchangeRates);
+              }
+          }
+          var timestamp = Date.now();
+          xhr.open('GET', 'api/account/currency-exchange-rates?timestamp=' + timestamp, true);
+          xhr.send(null);
+        };
+
+        var twoDigit = function (n) {
+          return ("0" + n).slice(-2);
+        };
+
+        var startCountdown = function () {
+          // Set the date we're counting down to
+          var countDownDate = CONSTANTS.icoStartDate;
+
+          // Update the count down every 1 second
+          var x = setInterval(function() {
+            var now = new Date().getTime();
+            var distance = countDownDate - now;
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("timer").innerHTML = 'ICO Starts <span style="color:#eb1c24">' + twoDigit(days) + ':' + twoDigit(hours) + ':' +
+              twoDigit(minutes) + ':' + twoDigit(seconds) + '</span>';
+
+            if (distance < 0) {
+              clearInterval(x);
+              document.getElementById("timer").innerHTML = "";
+            }
+          }, 1000);
+        };
+
+        var showCurrencies = function () {
+          fetchCurrencyRates(function (rates) {
+            var total = 0;
+            currencies.forEach(function (c) {
+              var el = document.getElementById('presale-' + c.code);
+              var amount = CONSTANTS[c.code];
+              var exchangeRate = rates.find(r => r.value === c.value);
+              if (el && amount && exchangeRate) {
+                el.innerHTML = amount;
+                total+=amount * exchangeRate.last_price;
+              }
+            });
+            document.getElementById('presale-total').innerHTML = '<span style="color:#eb1c24">USD ' + total.toFixed(2) + '</span>';
+          });
+        };
+
+        window.onload = function () {
+          showCurrencies();
+          startCountdown();
+        };
+      })();
+
       $( document ).ready(function () {
         function closeNavBarOnClick () {
           $(".nav-link").click(function () {
