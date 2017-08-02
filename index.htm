@@ -74,10 +74,40 @@
         <h1>Join the <span style="color:#eb1c24">ICO</span> of the casino that profited 7400 Bitcoin!</h1>
         <br>
         <h2 id="timer"></h2>
-        <br/>
-        <p class="text-center">
+        <!--<br/>
+         <p class="text-center">
           <a href="#ico" class="btn btn-primary">Click for details</a>
-        </p>
+        </p> -->
+      </div>
+    </section>
+
+    <section class="text-center" id="presale">
+      <div class="container">
+        <h3>Presale contribution</h3>
+        <br>
+        <div class="row">
+          <div class="col-md-3 offset-md-3 presale-currency">
+            <img src="BTC.svg">
+            <div class="presale-currency__data">
+              <div class="presale-currency__data__currency">BTC</div>
+              <div id="presale-BTC" class="presale-currency__data__amount">372.2790707</div>
+            </div>
+          </div>
+          <div class="col-md-3 presale-currency">
+            <img src="ETH.svg">
+            <div class="presale-currency__data">
+              <div class="presale-currency__data__currency">ETH</div>
+              <div id="presale-ETH" class="presale-currency__data__amount">725.2345233</div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <!-- <div class="row">
+          <div class="col-md-6 offset-md-3">
+            TOTAL
+          </div>
+          <div id="presale-total" class="col-md-6 offset-md-3"></div>
+        </div> -->
       </div>
     </section>
 
@@ -465,12 +495,7 @@
           return ("0" + n).slice(-2);
         };
 
-        var startCountdown = function () {
-          // Set the date we're counting down to
-          var countDownDate = CONSTANTS.icoStartDate;
-
-          // Update the count down every 1 second
-          var x = setInterval(function() {
+        var tick = function(){
             var now = new Date().getTime();
             var distance = countDownDate - now;
             var days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -485,6 +510,15 @@
               clearInterval(x);
               document.getElementById("timer").innerHTML = "";
             }
+        };
+          var countDownDate = CONSTANTS.icoStartDate;
+
+        var startCountdown = function () {
+          // Set the date we're counting down to
+
+          // Update the count down every 1 second
+          var x = setInterval(function() {
+            tick();
           }, 1000);
         };
 
@@ -505,7 +539,8 @@
         };
 
         window.onload = function () {
-          showCurrencies();
+          //showCurrencies();
+          tick();
           startCountdown();
         };
       })();

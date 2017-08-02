@@ -148,3 +148,40 @@ footer {
 footer p {
   margin-bottom: .25rem;
 }
+
+/* Presale contribution */
+#presale {
+  border-top-width: 30px;
+  background-color: #000;
+  color: #fff;
+}
+
+.presale-currency {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+
+.presale-currency img {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.presale-currency__data {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.presale-currency__data__amount {
+  color: #eb1c24;
+  font-weight: bold;
+}
+
+#presale-total {
+    font-size: 22px;
+    font-weight: bold;
+}
