@@ -1,0 +1,423 @@
+a{
+  color:#eb1c24;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #eb1c24;
+    border-color: #eb1c24;
+}
+
+.right-nav li {
+  font-size:24px;
+}
+
+.bg-inverse{
+  background-color: #000!important;
+}
+
+.navbar {
+  margin-bottom: 0;
+  min-height: 64px;
+}
+
+h4{
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+.jumbotron {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  margin-bottom: 0;
+  background-color: #000;
+  color: #ccc;
+  border-radius: 0px;
+}
+.bklogo {
+  max-width: 400px;
+  width: 100%;
+}
+
+section {
+  padding-top: 40px;
+  padding-bottom: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+  position: relative;
+  border-top: 66px solid transparent;
+  margin: -30px 0 0;
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+}
+
+section:before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 0;
+  right: 0;
+  border-top: 2px solid transparent;
+}
+
+section p {
+  text-align: justify;
+}
+
+#roadmap p {
+  text-align: center;
+}
+
+#stats{
+  padding: 30px;
+  background-color: #f7f7f7;
+  
+}
+
+#blog{
+  padding: 30px;
+  background-color: #f7f7f7;
+}
+
+
+#translations{
+  padding: 30px;
+  background-color: #f7f7f7;
+  
+}
+
+#stats .fa{
+  font-size: 40px;
+}
+
+#stats .counter{
+  display: block;
+  font-size: 43px;
+  font-weight: 900;
+  line-height: 1;
+  margin: 15px 0 0;
+}
+
+#stats em{
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 1px;
+  font-style: normal;
+}
+
+.stats-row .col-md-3, .stats-row .col-sm-6 {
+  padding: 15px;
+}
+
+#games-album {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background-color: #f7f7f7;
+}
+
+.card {
+  float: left;
+  width: 33.333%;
+  padding: .75rem;
+  margin-bottom: 2rem;
+  border: 0;
+}
+
+.card > img {
+  margin-bottom: .75rem;
+}
+
+.card-text {
+  font-size: 85%;
+}
+
+#roadmap{
+  background-color: #f7f7f7;
+}
+
+footer {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+footer p {
+  margin-bottom: .25rem;
+}
+
+
+/* Modal */
+
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,.5);
+  display: table;
+  transition: opacity .3s ease;
+}
+
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.modal-container {
+  width: 70%;
+  margin: 0 auto;
+  color: #111;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.33);
+  transition: all .3s ease;
+  font-family: Helvetica,Arial,sans-serif;
+}
+
+@media (min-width: 992px)
+.modal-container, .provablyFairTable {
+  width: 66%;
+}
+
+@media (min-width: 768px)
+.modal-container, .provablyFairTable {
+    width: 50%;
+}
+
+.modal-header {
+  padding: 15px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.modal-header h3 {
+  margin-top: 0;
+  color: #42b983;
+}
+
+.modal-body {
+  margin: 20px 0;
+}
+
+.modal-default-button {
+  float: right;
+}
+
+/*
+ * The following styles are auto-applied to elements with
+ * transition="modal" when their visibility is toggled
+ * by Vue.js.
+ *
+ * You can easily play with the modal transition by editing
+ * these styles.
+ */
+
+.modal-enter {
+  opacity: 0;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+/* Loader */
+
+.loader-overlay {
+  position: fixed;
+  z-index: 10000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity .3s ease;
+}
+
+.spinner {
+  -webkit-animation: rotator 1.4s linear infinite;
+          animation: rotator 1.4s linear infinite;
+}
+
+@-webkit-keyframes rotator {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(270deg);
+            transform: rotate(270deg);
+  }
+}
+
+@keyframes rotator {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(270deg);
+            transform: rotate(270deg);
+  }
+}
+.path {
+  stroke-dasharray: 187;
+  stroke-dashoffset: 0;
+  -webkit-transform-origin: center;
+          transform-origin: center;
+  -webkit-animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+          animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+}
+
+@-webkit-keyframes colors {
+  0% {
+    stroke: #4285F4;
+  }
+  25% {
+    stroke: #DE3E35;
+  }
+  50% {
+    stroke: #F7C223;
+  }
+  75% {
+    stroke: #1B9A59;
+  }
+  100% {
+    stroke: #4285F4;
+  }
+}
+
+@keyframes colors {
+  0% {
+    stroke: #4285F4;
+  }
+  25% {
+    stroke: #DE3E35;
+  }
+  50% {
+    stroke: #F7C223;
+  }
+  75% {
+    stroke: #1B9A59;
+  }
+  100% {
+    stroke: #4285F4;
+  }
+}
+@-webkit-keyframes dash {
+  0% {
+    stroke-dashoffset: 187;
+  }
+  50% {
+    stroke-dashoffset: 46.75;
+    -webkit-transform: rotate(135deg);
+            transform: rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: 187;
+    -webkit-transform: rotate(450deg);
+            transform: rotate(450deg);
+  }
+}
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 187;
+  }
+  50% {
+    stroke-dashoffset: 46.75;
+    -webkit-transform: rotate(135deg);
+            transform: rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: 187;
+    -webkit-transform: rotate(450deg);
+            transform: rotate(450deg);
+  }
+}
+
+
+.btn-cursor{
+  cursor: pointer;
+}
+a:hover, a:visited, a:link, a:active {
+    text-decoration: none!important;
+    -webkit-box-shadow: none!important;
+    box-shadow: none!important;
+}
+
+.banned {
+  background-image: url(../img/ban.svg);
+  background-size: contain;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+.auth-container {
+  background: #000;
+  color: #fff;
+}
+
+.auth-form .form-control {
+  margin-bottom: 20px;
+}
+
+.table-striped tbody tr:nth-of-type(even) {
+  background-color: #ccc;
+}
+
+
+/* Presale contribution */
+#presale {
+  border-top-width: 30px;
+  background-color: #000;
+  color: #fff;
+}
+
+.presale-currency {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+
+.presale-currency img {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.presale-currency__data {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.presale-currency__data__amount {
+  color: #eb1c24;
+  font-weight: bold;
+}
+
+#presale-total {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.nav-link.login-button {
+  padding-top: 10px;
+  font-size: 20px;
+}
+
+#presale {
+  opacity: 0;
+  transition: opacity 50ms ease;
+}
