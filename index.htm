@@ -96,8 +96,8 @@
 		  				<div class="countdown-timer">	ICO STARTS IN : <span style="color:#eb1c24"><b id="timer"></b></span></div>
 		  			</div>
 		  			<div class="row col-md-8">
-		  				<div class="col-md-12 row pre-sale-heading"> PRE-SALE CONTRIBUTION </div>
-		  				<div class="col-md-6 row pre-sale"> 
+		  				<div class="col-md-12 row pre-sale-heading"> FUNDS RAISED </div>
+		  				<div class="col-md-12 row pre-sale"> 
 		  					<div class="flex-row pre-sale-mob">
 		  					<img width="40" height="40" src="assets/img/BTC.svg" />
 			  					<div class="pre-sale-text presale-currency__data">
@@ -112,7 +112,13 @@
 			  						<div style="color:#eb1c24" id="presale-ETH" class="presale-currency__data__amount">725.2345233</div>
 			  					</div>
 			  					</div>
-
+                  <div class="flex-row">
+									<img width="40" height="40" src="assets/img/LTC.svg" />
+									<div class="pre-sale-text presale-currency__data">
+										<div class="presale-currency__data__currency"> LTC </div>
+										<div style="color:#eb1c24" id="presale-LTC" class="presale-currency__data__amount">0</div>
+									</div>
+									</div>
               </div>
 
             </div>
@@ -520,6 +526,14 @@
     <script type="text/javascript">
 
 (function () {
+				var api = "https://ico.betking.io";
+        var addCommas = (x) => {
+          if (parseFloat(x) === 0) {
+            return 0;
+          }
+          var parts = x.toString().split('.');
+          return `${parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}.${parts[1]}`;
+        };
         var fetchCurrencyRates = function (done) {
           var xhr = new XMLHttpRequest();
           xhr.onreadystatechange = function() {
@@ -529,14 +543,12 @@
               }
           }
           var timestamp = Date.now();
-          xhr.open('GET', 'api/account/currency-exchange-rates?timestamp=' + timestamp, true);
+          xhr.open('GET', api+'/api/account/currency-exchange-rates?timestamp=' + timestamp, true);
           xhr.send(null);
         };
-
         var twoDigit = function (n) {
           return ("0" + n).slice(-2);
         };
-
         var tick = function(){
             var now = new Date().getTime();
             var distance = countDownDate - now;
@@ -544,49 +556,56 @@
             var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
             document.getElementById("timer").innerHTML = twoDigit(days) + ':' + twoDigit(hours) + ':' +
               twoDigit(minutes) + ':' + twoDigit(seconds);
-
             if (distance < 0) {
               clearInterval(x);
               document.getElementById("timer").innerHTML = "";
             }
         };
           var countDownDate = CONSTANTS.icoStartDate;
-
         var startCountdown = function () {
           // Set the date we're counting down to
-
           // Update the count down every 1 second
           var x = setInterval(function() {
             tick();
           }, 1000);
         };
-
+        var fetchFunds = function (done) {
+          var xhr = new XMLHttpRequest();
+          xhr.onreadystatechange = function() {
+              if (xhr.readyState == XMLHttpRequest.DONE) {
+                var exchangeRates = JSON.parse(xhr.responseText);
+                if (typeof done === 'function') done(exchangeRates);
+              }
+          }
+          var timestamp = Date.now();
+          xhr.open('GET', api+'/api/account/funds-raised?timestamp=' + timestamp, true);
+          xhr.send(null);
+        };
         var showCurrencies = function () {
           fetchCurrencyRates(function (rates) {
-            var total = 0;
-            currencies.forEach(function (c) {
-              var el = document.getElementById('presale-' + c.code);
-              var amount = CONSTANTS[c.code];
-              var exchangeRate = rates.find(r => r.value === c.value);
-              if (el && amount && exchangeRate) {
-                el.innerHTML = amount;
-                total+=amount * exchangeRate.last_price;
-              }
+            fetchFunds(function (funds) {
+              var total = 0;
+              currencies.forEach(function (c) {
+                var el = document.getElementById('presale-' + c.code);
+                var amount = funds.find(f => f.currency === c.value);
+                var exchangeRate = rates.find(r => r.value === c.value);
+                if (el && amount && amount.funds && exchangeRate) {
+                  el.innerHTML = addCommas(amount.funds);
+                  total+=amount.funds * exchangeRate.last_price;
+                }
+              });
+              document.getElementById('presale-total').innerHTML = '<span style="color:#eb1c24">USD ' + addCommas(total.toFixed(2)) + '</span>';
             });
-            document.getElementById('presale-total').innerHTML = '<span style="color:#eb1c24">USD ' + total.toFixed(2) + '</span>';
           });
         };
-
         window.onload = function () {
-          //showCurrencies();
+          showCurrencies();
           tick();
           startCountdown();
         };
       })();
-
       $( document ).ready(function () {
         function closeNavBarOnClick () {
           $(".nav-link").click(function () {
@@ -597,8 +616,7 @@
         }
         closeNavBarOnClick();
       });
-    </script>
-  
+    </script>  
   <script>
   (function (w,i,d,g,e,t,s) {w[d] = w[d]||[];t= i.createElement(g);
     t.async=1;t.src=e;s=i.getElementsByTagName(g)[0];s.parentNode.insertBefore(t, s);
