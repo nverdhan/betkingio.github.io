@@ -545,7 +545,7 @@
               }
           }
           var timestamp = Date.now();
-          xhr.open('GET', api+'/api/account/currency-exchange-rates?timestamp=' + timestamp, true);
+          xhr.open('GET', api+'/api/bk/currency-exchange-rates?timestamp=' + timestamp, true);
           xhr.send(null);
         };
         var twoDigit = function (n) {
@@ -582,7 +582,7 @@
               }
           }
           var timestamp = Date.now();
-          xhr.open('GET', api+'/api/account/funds-raised?timestamp=' + timestamp, true);
+          xhr.open('GET', api+'/api/bk/funds-raised?timestamp=' + timestamp, true);
           xhr.send(null);
         };
         var showCurrencies = function () {
