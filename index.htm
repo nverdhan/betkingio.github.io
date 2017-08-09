@@ -7,6 +7,77 @@
       <meta name="author" content="">
       <link rel="icon" href="favicon.ico">
       <title>BetKing.io - ICO</title>
+      <script type="text/javascript">
+          var CONSTANTS = {
+            icoStartDate: new Date(new Date(Date.UTC(2017, 7, 7, 0, 0, 0))).getTime()
+          }
+          var currencies = [
+            {value: 0, symbol: '฿', code: 'BTC'},
+            {value: 1, symbol: 'E', code: 'ETH'},
+            {value: 2, symbol: 'D', code: 'DASH'},
+            {value: 3, symbol: 'L', code: 'LTC'},
+          ];
+          var api = "https://ico.betking.io";
+
+          var HTML_LOADED = false;
+          var FUNDS = [];
+          var EXCHANGE_RATES = [];
+
+          function showCurrencies () {
+            if (FUNDS.length > 0 && EXCHANGE_RATES.length > 0 && HTML_LOADED) {
+              var total = 0;
+              currencies.forEach(function (c) {
+                var el = document.getElementById('presale-' + c.code);
+                var amount = FUNDS.find(f => f.currency === c.value);
+                var exchangeRate = EXCHANGE_RATES.find(r => r.value === c.value);
+                if (el && amount && amount.funds && exchangeRate) {
+                  el.innerHTML = addCommas(amount.funds);
+                  total+=amount.funds * exchangeRate.last_price;
+                }
+              });
+              document.getElementById('presale-total').innerHTML = '<span style="color:#eb1c24">USD ' + addCommas(total.toFixed(2)) + '</span>';
+            }
+          }
+
+          var addCommas = (x) => {
+            if (parseFloat(x) === 0) {
+              return 0;
+            }
+            var parts = x.toString().split('.');
+            return `${parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}.${parts[1]}`;
+          };
+        (function () {
+          var fetchCurrencyRates = function () {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == XMLHttpRequest.DONE) {
+                  EXCHANGE_RATES = JSON.parse(xhr.responseText);
+                  showCurrencies();
+                }
+            }
+            var timestamp = Date.now();
+            xhr.open('GET', api+'/api/bk/currency-exchange-rates?timestamp=' + timestamp, true);
+            xhr.send(null);
+          };
+          var twoDigit = function (n) {
+            return ("0" + n).slice(-2);
+          };
+          var fetchFunds = function () {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+              if (xhr.readyState == XMLHttpRequest.DONE) {
+                FUNDS = JSON.parse(xhr.responseText);
+                showCurrencies();
+              }
+            }
+            var timestamp = Date.now();
+            xhr.open('GET', api+'/api/bk/funds-raised?timestamp=' + timestamp, true);
+            xhr.send(null);
+          };
+          fetchCurrencyRates();
+          fetchFunds();
+        })();
+      </script>
       <link href="assets/css/bootstrap.css" rel="stylesheet">
       <!-- <link href="index.css" rel="stylesheet"> -->
       <link rel="stylesheet" href="assets/css/font-awesome-4.7.0/css/font-awesome.min.css">
@@ -87,46 +158,49 @@
       </nav>
       <div>
         <div class="container bk-top-banner">
-	  			<div class="container">
-		  			<img class="bklogo" src="assets/img/bklogo.png" width="281" height="80" title="BetKing Logo" />
-		  			<div class="row col-md-8">
-		  				<div class="head-text">	Join the <span style="color:#eb1c24">ICO</span> of the casino that profited <b>7400</b> Bitcoin</div>
-		  			</div>
-		  			<div class="row col-md-8">
-		  			</div>
-		  			<div class="row col-md-8">
-		  				<div class="col-md-12 row pre-sale-heading"> FUNDS RAISED </div>
-		  				<div class="col-md-12 row pre-sale"> 
-		  					<div class="flex-row pre-sale-mob">
-		  					<img width="40" height="40" src="assets/img/BTC.svg" />
-			  					<div class="pre-sale-text presale-currency__data">
-			  						<div class="presale-currency__data__currency"> BTC</div>
-			  						<div style="color:#eb1c24" id="presale-BTC" class="presale-currency__data__amount">393.6983982</div>
-			  					</div>
-			  					</div>
-			  					<div class="flex-row">
-			  					<img width="40" height="40" src="assets/img/ETH.svg" />
-			  					<div class="pre-sale-text presale-currency__data">
-			  						<div class="presale-currency__data__currency"> ETH </div>
-			  						<div style="color:#eb1c24" id="presale-ETH" class="presale-currency__data__amount">725.2345233</div>
-			  					</div>
-			  					</div>
+          <div class="container">
+            <img class="bklogo" src="assets/img/bklogo.png" width="281" height="80" title="BetKing Logo" />
+            <div class="row col-md-8">
+              <div class="head-text"> Join the <span style="color:#eb1c24">ICO</span> of the casino that profited <b>7400</b> Bitcoin</div>
+            </div>
+            <div class="row col-md-8">
+            </div>
+            <div class="row col-md-8">
+              <div class="col-md-12 row pre-sale-heading"> FUNDS RAISED </div>
+              <div class="col-md-12 row pre-sale"> 
+                <div class="flex-row pre-sale-mob">
+                <img width="40" height="40" src="assets/img/BTC.svg" />
+                  <div class="pre-sale-text presale-currency__data">
+                    <div class="presale-currency__data__currency"> BTC</div>
+                    <div style="color:#eb1c24" id="presale-BTC" class="presale-currency__data__amount">393.6983982</div>
+                  </div>
+                  </div>
                   <div class="flex-row">
-									<img width="40" height="40" src="assets/img/LTC.svg" />
-									<div class="pre-sale-text presale-currency__data">
-										<div class="presale-currency__data__currency"> LTC </div>
-										<div style="color:#eb1c24" id="presale-LTC" class="presale-currency__data__amount">0</div>
-									</div>
+                  <img width="40" height="40" src="assets/img/ETH.svg" />
+                  <div class="pre-sale-text presale-currency__data">
+                    <div class="presale-currency__data__currency"> ETH </div>
+                    <div style="color:#eb1c24" id="presale-ETH" class="presale-currency__data__amount">725.2345233</div>
+                  </div>
+                  </div>
+                  <div class="flex-row">
+                  <img width="40" height="40" src="assets/img/LTC.svg" />
+                  <div class="pre-sale-text presale-currency__data">
+                    <div class="presale-currency__data__currency"> LTC </div>
+                    <div style="color:#eb1c24" id="presale-LTC" class="presale-currency__data__amount">0</div>
+                  </div>
                   </div>
                 <div class="col-md-12 row pre-sale-total"> Total: <div style="color:#eb1c24; margin-left: 10px;" id="presale-total"></div> </div>
       
               </div>
-
+              <script type="text/javascript">
+                HTML_LOADED = true;
+                showCurrencies();
+              </script>
             </div>
                     <br>
-		  			<div class="row col-md-6"> 
-		  				<a href="https://ico.betking.io/register" class="btn btn-primary">JOIN NOW</a>
-		  			</div>
+            <div class="row col-md-6"> 
+              <a href="https://ico.betking.io/register" class="btn btn-primary">JOIN NOW</a>
+            </div>
                     <br>
                     <br>
 
@@ -486,21 +560,6 @@
         </div>
         </div>
       </div>
-    <script type="text/javascript">
-  var CONSTANTS = {
-    icoStartDate: new Date(new Date(Date.UTC(2017, 7, 7, 0, 0, 0))).getTime(),
-    BTC: 372.2790707,
-    ETH: 725.2345233
-  }
-  var currencies = [
-    {value: 0, symbol: '฿', code: 'BTC'},
-    {value: 1, symbol: 'E', code: 'ETH'},
-    {value: 2, symbol: 'D', code: 'DASH'},
-    {value: 3, symbol: 'L', code: 'LTC'},
-    {value: 4, symbol: 'M', code: 'XMR'},
-    {value: 5, symbol: 'F', code: 'FREE'},
-  ];
-</script>
 
 
 <script>
@@ -525,64 +584,6 @@
     <script src="bootstrap.js"></script>
     <script src="ie10-viewport-bug-workaround.js"></script>
     <script type="text/javascript">
-
-(function () {
-				var api = "https://ico.betking.io";
-        var addCommas = (x) => {
-          if (parseFloat(x) === 0) {
-            return 0;
-          }
-          var parts = x.toString().split('.');
-          return `${parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}.${parts[1]}`;
-        };
-        var fetchCurrencyRates = function (done) {
-          var xhr = new XMLHttpRequest();
-          xhr.onreadystatechange = function() {
-              if (xhr.readyState == XMLHttpRequest.DONE) {
-                var exchangeRates = JSON.parse(xhr.responseText);
-                if (typeof done === 'function') done(exchangeRates);
-              }
-          }
-          var timestamp = Date.now();
-          xhr.open('GET', api+'/api/bk/currency-exchange-rates?timestamp=' + timestamp, true);
-          xhr.send(null);
-        };
-        var twoDigit = function (n) {
-          return ("0" + n).slice(-2);
-        };
-        var fetchFunds = function (done) {
-          var xhr = new XMLHttpRequest();
-          xhr.onreadystatechange = function() {
-              if (xhr.readyState == XMLHttpRequest.DONE) {
-                var exchangeRates = JSON.parse(xhr.responseText);
-                if (typeof done === 'function') done(exchangeRates);
-              }
-          }
-          var timestamp = Date.now();
-          xhr.open('GET', api+'/api/bk/funds-raised?timestamp=' + timestamp, true);
-          xhr.send(null);
-        };
-        var showCurrencies = function () {
-          fetchCurrencyRates(function (rates) {
-            fetchFunds(function (funds) {
-              var total = 0;
-              currencies.forEach(function (c) {
-                var el = document.getElementById('presale-' + c.code);
-                var amount = funds.find(f => f.currency === c.value);
-                var exchangeRate = rates.find(r => r.value === c.value);
-                if (el && amount && amount.funds && exchangeRate) {
-                  el.innerHTML = addCommas(amount.funds);
-                  total+=amount.funds * exchangeRate.last_price;
-                }
-              });
-              document.getElementById('presale-total').innerHTML = '<span style="color:#eb1c24">USD ' + addCommas(total.toFixed(2)) + '</span>';
-            });
-          });
-        };
-        window.onload = function () {
-          showCurrencies();
-        };
-      })();
       $( document ).ready(function () {
         function closeNavBarOnClick () {
           $(".nav-link").click(function () {
