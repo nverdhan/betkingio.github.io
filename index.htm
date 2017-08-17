@@ -18,10 +18,53 @@
             {value: 3, symbol: 'L', code: 'LTC'},
           ];
           var api = "https://ico.betking.io";
+          var oddsApi = "https://sport.betking.io";
 
           var HTML_LOADED = false;
           var FUNDS = [];
           var EXCHANGE_RATES = [];
+          var ODDS = [];
+          var ODDS_HTML_LOADED = false;
+
+          function GCD(num1,num2) {
+            var a; var b;
+            if (num1 < num2) {a = num2; b = num1;}
+            else if (num1 > num2) {a = num1; b = num2;}
+            else if (num1 == num2) {return num1;}
+            while(1) {
+              if (b == 0) {
+                return a;
+              }
+              else {
+                var temp = b;
+                b = a % b;
+                a = temp;
+              }
+            }
+          }
+
+          function reduce(a,b) {
+            var n  = new Array(2);
+            var f = GCD(a,b);
+            n[0] = a/f;
+            n[1] = b/f;
+            return n;
+          }
+
+          function fractionalFromDecimal (decimal) {
+            decimal = parseFloat(decimal).toFixed(2);
+            var num = (decimal-1) * 10000;
+            var dom = 10000;
+
+            num = Math.round(num);
+            dom = Math.round(dom);
+
+            var a = reduce(num,dom);
+            num = a[0];
+            dom = a[1];
+
+            return(num+' / '+dom);
+          }
 
           function showCurrencies () {
             if (FUNDS.length > 0 && EXCHANGE_RATES.length > 0 && HTML_LOADED) {
@@ -36,6 +79,13 @@
                 }
               });
               document.getElementById('presale-total').innerHTML = '<span style="color:#eb1c24">USD ' + addCommas(total.toFixed(2)) + '</span>';
+            }
+          }
+
+          function showOdds () {
+            if (ODDS.length > 0 && ODDS_HTML_LOADED) {
+              document.getElementById('mcgregor-odds').innerHTML = fractionalFromDecimal(ODDS.find(function (o) { return o.fighter_name_small === 'mcgregor'; }).odds);
+              document.getElementById('mayweather-odds').innerHTML = fractionalFromDecimal(ODDS.find(function (o) { return o.fighter_name_small === 'mayweather'; }).odds);
             }
           }
 
@@ -74,15 +124,28 @@
             xhr.open('GET', api+'/api/bk/funds-raised?timestamp=' + timestamp, true);
             xhr.send(null);
           };
+          var fetchOdds = function () {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+              if (xhr.readyState == XMLHttpRequest.DONE) {
+                ODDS = JSON.parse(xhr.responseText);
+                showOdds();
+              }
+            }
+            var timestamp = Date.now();
+            xhr.open('GET', oddsApi + '/api/bk/odds?timestamp=' + timestamp, true);
+            xhr.send(null);
+          };
           fetchCurrencyRates();
           fetchFunds();
+          fetchOdds();
         })();
       </script>
       <link href="assets/css/bootstrap.css" rel="stylesheet">
       <!-- <link href="index.css" rel="stylesheet"> -->
       <link rel="stylesheet" href="assets/css/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/homepage.css">
-      <link href="https://fonts.googleapis.com/css?family=Monda|Roboto:300,400" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Monda:400,700|Roboto:300,400" rel="stylesheet">
   </head>
   <body>
     <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top">
@@ -157,17 +220,49 @@
         </div>
       </nav>
       <div>
+        <div>
         <div class="container bk-top-banner">
-          <div class="container">
-            <img class="bklogo" src="assets/img/bklogo.png" width="281" height="80" title="BetKing Logo" />
-            <div class="row col-md-8">
-              <div class="head-text"> Join the <span style="color:#eb1c24">ICO</span> of the casino that profited <b>7400</b> Bitcoin</div>
+          <div class="container fighters-bg">
+            <div class="container">
+            <div class="container row">
+              <div class="row col-md-12 ">
+                <div class="col-md-6" style="padding-top: 50px; margin-left: -15px; margin-right: -15px;">
+                  <div class="row head-text" style="letter-spacing: 4px;">
+                   Mayweather 
+                  </div>
+                  <div class="row head-text">
+                     <span style="color:#eb1c24; margin-right: 3px;">VS.</span> <span style="text-transform: none;">McGREGOR </span>
+                  </div>
+                  <div class="row date-text"> August 26 </div>
+                  <div class="row bet-text">
+                   bet on MAYWEATHER <span style="color:#eb1c24; margin-left: 5px; margin-right: 3px;">vs.</span><span> McGREGOR </span>   <span>with <b style=" margin-left: 5px;">bitcoin</b>
+                  </div>
+                  <div class="row bet-odds bet-odds-bottom">
+                    <div class="row col-md-12 bet-odds-heading"> latest odds </div>
+                    <div class="col-lg-6 bet-odds right-border">
+                      MAYWEATHER:&nbsp;<span id="mayweather-odds" style="color:#eb1c24; margin-left: 3px;"></span>
+                    </div>
+                    <div class="col-lg-6 bet-odds-right">
+                       McGregor:&nbsp;<span id="mcgregor-odds" style="color:#eb1c24; margin-left: 3px;"></span> 
+                    </div>
+                  </div>
+                  <script type="text/javascript">
+                    ODDS_HTML_LOADED = true;
+                    showOdds();
+                  </script>
+                  <div class="row bet-odds">
+                    <a href="https://sport.betking.io/Mayweather-vs-Mcgregor" class="btn btn-primary bet-btn">BET NOW</a>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="row col-md-8">
-            </div>
-            <div class="row col-md-8">
-              <div class="col-md-12 row pre-sale-heading"> FUNDS RAISED </div>
+          </div>
+
+            <div class="row col-md-12" style="margin-top: -25px;margin-bottom: -35px;">
               <div class="col-md-12 row pre-sale"> 
+              <div class=" section-heading">Join the ICO of the casino that profited 7400 Bitcoin</div>
+              <img class="line" src="assets/img/line.png" width="100%" title="Line" />
+              <div class="row col-md-12 pre-sale-heading" style="margin-bottom: 5px;"> Funds Raised </div>
                 <div class="flex-row pre-sale-mob">
                 <img width="40" height="40" src="assets/img/BTC.svg" />
                   <div class="pre-sale-text presale-currency__data">
@@ -175,22 +270,21 @@
                     <div style="color:#eb1c24" id="presale-BTC" class="presale-currency__data__amount">397.0087754</div>
                   </div>
                   </div>
-                  <div class="flex-row">
+                  <div class="flex-row pre-sale-mob">
                   <img width="40" height="40" src="assets/img/ETH.svg" />
                   <div class="pre-sale-text presale-currency__data">
                     <div class="presale-currency__data__currency"> ETH </div>
                     <div style="color:#eb1c24" id="presale-ETH" class="presale-currency__data__amount">725.2345233</div>
                   </div>
                   </div>
-                  <div class="flex-row">
+                  <div class="flex-row pre-sale-mob">
                   <img width="40" height="40" src="assets/img/LTC.svg" />
                   <div class="pre-sale-text presale-currency__data">
                     <div class="presale-currency__data__currency"> LTC </div>
                     <div style="color:#eb1c24" id="presale-LTC" class="presale-currency__data__amount">0</div>
                   </div>
                   </div>
-                <div class="col-md-12 row pre-sale-total"> Total: <div style="color:#eb1c24; margin-left: 10px;" id="presale-total"></div> </div>
-      
+                  <div class="flex-row pre-sale-total"> Total: <div style="color:#eb1c24; margin-left: 10px;" id="presale-total"> USD 1183594.70 </div> </div>
               </div>
               <script type="text/javascript">
                 HTML_LOADED = true;
@@ -199,12 +293,24 @@
             </div>
                     <br>
             <div class="row col-md-6"> 
-              <a href="https://ico.betking.io/register" class="btn btn-primary">JOIN NOW</a>
+              <a href="https://ico.betking.io/register" class="btn btn-primary" style="min-width: 120px;">JOIN NOW</a>
             </div>
                     <br>
                     <br>
 
-            <div class="row col-md-6" style="margin-bottom: 10px;">
+        </div>
+        </div>
+      <div class="container">
+        <div class="container row">
+          <div class="row col-md-6 section-heading">Welcome
+          </div>
+          <img src="assets/img/line.png" width="100%" title="Line" />
+          <div class="row col-md-4" style="padding-top: 50px">
+            <div class="head-sub-text">
+                BetKing opened in April 2013 and by the end of 2014 quickly became the most popular crowd funded Bitcoin casino. From 2015 BetKing had the most wagered volume of all crowdfunded gambling sites, 400,000 Bitcoin, almost more than all competitors combined! With a 6000 Bitcoin crowdfunded bankroll BetKing was the most trusted dice site with the highest betting limits. All 6000 Bitcoin were returned to investors when we closed in December 2016.
+              </div>
+          </div>
+          <div class="row col-md-8 flex-center stats-box-container" style="margin-bottom: 10px;">
               <div class="stats-box" style="margin-left:  0px;"> 
                 <img class="stats-icon-profit" src="assets/img/stat-bk-profit.png" width="34" height="46" /> 
                 <div class="stats-text"><b>7391</b></div>
@@ -228,25 +334,13 @@
             </div>
             <div class="row col-md-6 stats-note">*BetKing stats from Sept 2014 to Dec 2016</div>
         </div>
-        </div>
-      <div class="container">
-        <div class="container row">
-          <div class="row col-md-6 section-heading">Welcome
-          </div>
-          <img src="assets/img/line.png" width="100%" title="Line" />
-          <div class="row col-md-12" style="padding-top: 50">
-            <div class="head-sub-text">
-                BetKing opened in April 2013 and by the end of 2014 quickly became the most popular crowd funded Bitcoin casino. From 2015 BetKing had the most wagered volume of all crowdfunded gambling sites, 400,000 Bitcoin, almost more than all competitors combined! With a 6000 Bitcoin crowdfunded bankroll BetKing was the most trusted dice site with the highest betting limits. All 6000 Bitcoin were returned to investors when we closed in December 2016.
-              </div>
-          </div>
-        </div>
       </div>
         <div class="container">
           <div class="container row">
             <div class="row col-md-6 section-heading">WHAT'S NEW?</div>
             <img src="assets/img/line.png" width="100%" title="Line" />
             <div class="row col-md-12 hue-background">
-              <div class="col-md-4" style="padding-top: 50">
+              <div class="col-md-4" style="padding-top: 50px">
                 <div class="row section-content">
                   The new platform will offer new updated provably fair casino games such as Blackjack and Roulette as well as all your favorites.
                 </div>
@@ -276,7 +370,7 @@
             </div>
             <img src="assets/img/line.png" width="100%" title="Line" />
             <div class="row col-md-12 hue-background">
-              <div class="col-md-4" style="padding-top: 50">
+              <div class="col-md-4" style="padding-top: 50px">
                 <div class="row section-content">
                   BetKing made a profit of almost 7400 Bitcoin in a little over two years!
                 </div>
@@ -290,19 +384,19 @@
                   We have a list of 3rd party partners already interested in integrating with our new platform.
                 </div>
                 <div class="row section-sub-heading">Latest BLOG POSTS</div>
-                <div class="row  col-md-12 section-links">
-                  <a style="color:#eb1c24" href="https://medium.com/betking-blog/betking-ico-launched-2-million-raised-so-far-d906e9fffc7c">BetKing ICO Launched — $2 million raised so far!</a>
+                <div class="row section-links">
+                  <a href="https://medium.com/betking-blog/betking-ico-launched-2-million-raised-so-far-d906e9fffc7c">BetKing ICO Launched — $2 million raised so far!</a>
                 </div>
                 
-                <div class="row  col-md-12 section-links">
-                                  <a style="color:#eb1c24" href="https://medium.com/betking-blog/betking-ico-raises-over-1-200-000-in-pre-sale-e7836bc2ad2b">BetKing ICO Raises Over $1,200,000 In Pre-sale</a>
+                <div class="row section-links">
+                                  <a href="https://medium.com/betking-blog/betking-ico-raises-over-1-200-000-in-pre-sale-e7836bc2ad2b">BetKing ICO Raises Over $1,200,000 In Pre-sale</a>
                 </div>
-                <div class="row  col-md-12 section-links">
-                <a style="color:#eb1c24" href="https://medium.com/betking-blog/betking-relaunch-ico-crowdsale-b75fbd3add1d">BetKing Relaunch + ICO Crowdsale</a>
+                <div class="row section-links">
+                <a href="https://medium.com/betking-blog/betking-relaunch-ico-crowdsale-b75fbd3add1d">BetKing Relaunch + ICO Crowdsale</a>
 
                 </div>
-                <div class="row  col-md-12 section-links" style="margin-bottom: 40px;">
-                                  <a style="color:#eb1c24" href="https://medium.com/betking-blog/betking-ico-pre-sale-769acd7d2731">BetKing ICO Pre-sale raises $535,000 so far!</a>
+                <div class="row section-links" style="margin-bottom: 40px;">
+                                  <a  href="https://medium.com/betking-blog/betking-ico-pre-sale-769acd7d2731">BetKing ICO Pre-sale raises $535,000 so far!</a>
 
                 </div>
               </div>
@@ -461,7 +555,7 @@
           <div class="container row">
             <div class="row col-md-6 section-heading">Bug Bounty</div>
           <img class="mt-3" src="assets/img/line.png" width="100%" title="Line" />
-            <div class="col-md-4" style="padding-top: 50">
+            <div class="col-md-4" style="padding-top: 50px">
                 <div class="row section-content">
                   We will reward 500,000 (0.5%) of the total BetKing Bankroll Tokens to bounty participants.
                 </div>
@@ -576,17 +670,30 @@
   ga('send', 'pageview');
 
 </script>
-    <script src="jquery-3.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="assets/js/jquery-3.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="tether.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="holder.js"></script>
+    <script type="text/javascript">
+        $('.card-header').on('click', function(e){
+          console.log();
+          if ($(this).hasClass('transform-img')) {
+            $(this).removeClass('transform-img')
+            $(this).addClass('transform-img-back')
+          } else {
+            $(this).removeClass('transform-img-back')
+             $(this).addClass('transform-img')
+          }
+        })
+
+      </script>
+    <script src="assets/js/tether.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="assets/js/holder.js"></script>
     <script>
       $(function () {
         Holder.addTheme("thumb", { background: "#55595c", foreground: "#eceeef", text: "Thumbnail" });
       });
     </script>
-    <script src="bootstrap.js"></script>
-    <script src="ie10-viewport-bug-workaround.js"></script>
+    <script src="assets/js/bootstrap.js"></script>
+    <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
     <script type="text/javascript">
       $( document ).ready(function () {
         function closeNavBarOnClick () {
