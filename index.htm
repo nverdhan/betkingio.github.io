@@ -1,4 +1,4 @@
-<html>
+﻿<html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
       <meta charset="utf-8">
@@ -44,8 +44,8 @@
 
           function showOdds () {
             if (ODDS.length > 0 && ODDS_HTML_LOADED) {
-              document.getElementById('mcgregor-odds').innerHTML = ODDS.find(function (o) { return o.fighter_name_small === 'mcgregor'; }).odds;
-              document.getElementById('mayweather-odds').innerHTML = ODDS.find(function (o) { return o.fighter_name_small === 'mayweather'; }).odds;
+              document.getElementById('mcgregor-odds').innerHTML = ODDS.find(function (o) { return o.fighter_name_small === 'mcgregor'; }).odds.toFixed(4);
+              document.getElementById('mayweather-odds').innerHTML = ODDS.find(function (o) { return o.fighter_name_small === 'mayweather'; }).odds.toFixed(4);
             }
           }
 
