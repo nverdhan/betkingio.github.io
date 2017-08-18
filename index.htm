@@ -41,11 +41,17 @@
               document.getElementById('presale-total').innerHTML = '<span style="color:#eb1c24">USD ' + addCommas(total.toFixed(2)) + '</span>';
             }
           }
+          var roundDown = function (x, p) {
+            var s = x.toString().split('.').length > 1 ? x.toString().split('.')[1].length : 0;
+            if (s < p) return x;
+            var power = Math.pow(10, p);
+            return Math.floor(x * power) / power;
+          };
 
           function showOdds () {
             if (ODDS.length > 0 && ODDS_HTML_LOADED) {
-              document.getElementById('mcgregor-odds').innerHTML = parseFloat(ODDS.find(function (o) { return o.fighter_name_small === 'mcgregor'; }).odds).toFixed(4);
-              document.getElementById('mayweather-odds').innerHTML = parseFloat(ODDS.find(function (o) { return o.fighter_name_small === 'mayweather'; }).odds).toFixed(4);
+              document.getElementById('mcgregor-odds').innerHTML = roundDown(parseFloat(ODDS.find(function (o) { return o.fighter_name_small === 'mcgregor'; }).odds), 4);
+              document.getElementById('mayweather-odds').innerHTML = roundDown(parseFloat(ODDS.find(function (o) { return o.fighter_name_small === 'mayweather'; }).odds), 4);
             }
           }
 
