@@ -44,8 +44,8 @@
 
           function showOdds () {
             if (ODDS.length > 0 && ODDS_HTML_LOADED) {
-              document.getElementById('mcgregor-odds').innerHTML = parseFloat(ODDS.find(function (o) { return o.fighter_name_small === 'mcgregor'; }).odds.toFixed(4));
-              document.getElementById('mayweather-odds').innerHTML = parseFloat(ODDS.find(function (o) { return o.fighter_name_small === 'mayweather'; }).odds.toFixed(4));
+              document.getElementById('mcgregor-odds').innerHTML = parseFloat(ODDS.find(function (o) { return o.fighter_name_small === 'mcgregor'; }).odds).toFixed(4);
+              document.getElementById('mayweather-odds').innerHTML = parseFloat(ODDS.find(function (o) { return o.fighter_name_small === 'mayweather'; }).odds).toFixed(4);
             }
           }
 
