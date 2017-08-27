@@ -41,20 +41,6 @@
               document.getElementById('presale-total').innerHTML = '<span style="color:#eb1c24">USD ' + addCommas(total.toFixed(2)) + '</span>';
             }
           }
-          var roundDown = function (x, p) {
-            var s = x.toString().split('.').length > 1 ? x.toString().split('.')[1].length : 0;
-            if (s < p) return x;
-            var power = Math.pow(10, p);
-            return Math.floor(x * power) / power;
-          };
-
-          function showOdds () {
-            if (ODDS.length > 0 && ODDS_HTML_LOADED) {
-              document.getElementById('mcgregor-odds').innerHTML = roundDown(parseFloat(ODDS.find(function (o) { return o.fighter_name_small === 'mcgregor'; }).odds), 4);
-              document.getElementById('mayweather-odds').innerHTML = roundDown(parseFloat(ODDS.find(function (o) { return o.fighter_name_small === 'mayweather'; }).odds), 4);
-            }
-          }
-
           var addCommas = (x) => {
             if (parseFloat(x) === 0) {
               return 0;
@@ -90,21 +76,8 @@
             xhr.open('GET', api+'/api/bk/funds-raised?timestamp=' + timestamp, true);
             xhr.send(null);
           };
-          var fetchOdds = function () {
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-              if (xhr.readyState == XMLHttpRequest.DONE) {
-                ODDS = JSON.parse(xhr.responseText);
-                showOdds();
-              }
-            }
-            var timestamp = Date.now();
-            xhr.open('GET', oddsApi + '/api/bk/odds?timestamp=' + timestamp, true);
-            xhr.send(null);
-          };
           fetchCurrencyRates();
           fetchFunds();
-          fetchOdds();
         })();
       </script>
       <link href="assets/css/bootstrap.css" rel="stylesheet">
@@ -201,23 +174,10 @@
                   </div>
                   <div class="row date-text"> August 26 </div>
                   <div class="row bet-text">
-                   bet on MAYWEATHER <span style="color:#eb1c24; margin-left: 5px; margin-right: 3px;">vs.</span><span> McGREGOR </span>   <span>with <b style=" margin-left: 5px;">bitcoin</b>
+                   Total Wagered: x Btc
                   </div>
-                  <div class="row bet-odds bet-odds-bottom">
-                    <div class="row col-md-12 bet-odds-heading"> latest odds </div>
-                    <div class="col-lg-6 bet-odds right-border">
-                      MAYWEATHER:&nbsp;<span id="mayweather-odds" style="color:#eb1c24; margin-left: 3px;"></span>
-                    </div>
-                    <div class="col-lg-6 bet-odds-right">
-                       McGregor:&nbsp;<span id="mcgregor-odds" style="color:#eb1c24; margin-left: 3px;"></span> 
-                    </div>
-                  </div>
-                  <script type="text/javascript">
-                    ODDS_HTML_LOADED = true;
-                    showOdds();
-                  </script>
                   <div class="row bet-odds">
-                    <a href="https://sport.betking.io/Mayweather-vs-Mcgregor" class="btn btn-primary bet-btn">BET NOW</a>
+                    <a href="https://sport.betking.io/login" class="btn btn-primary bet-btn">Login</a>
                   </div>
                 </div>
               </div>
