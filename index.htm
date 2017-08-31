@@ -9,7 +9,8 @@
       <title>BetKing.io - ICO</title>
       <script type="text/javascript">
           var CONSTANTS = {
-            icoStartDate: new Date(new Date(Date.UTC(2017, 7, 7, 0, 0, 0))).getTime()
+            icoStartDate: new Date(new Date(Date.UTC(2017, 7, 7, 0, 0, 0))).getTime(),
+            icoEndDate: new Date(new Date(Date.UTC(2017, 8, 4, 0, 0, 0))).getTime()
           }
           var currencies = [
             {value: 0, symbol: '฿', code: 'BTC'},
@@ -167,6 +168,7 @@
                 <div class="head-text"> Join the <span style="color:#eb1c24">ICO</span> of the casino that profited <b>7400</b> Bitcoin</div>
               </div>
               <div class="row col-md-8">
+                <div class="countdown-timer"> ICO ENDS IN : <span style="color:#eb1c24"><b id="timer"></b></span></div>
               </div>
               <div class="row col-md-8">
                 <div class="col-md-12 row pre-sale-heading"> FUNDS RAISED </div>
@@ -636,7 +638,36 @@
         }
         closeNavBarOnClick();
       });
-    </script>  
+    </script>
+    <script type="text/javascript">
+      var countDownDate = CONSTANTS.icoEndDate;
+      var twoDigit = function (n) {
+        return ("0" + n).slice(-2);
+      };
+      var tick = function(){
+        var now = new Date().getTime();
+        var distance = countDownDate - now;
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        document.getElementById("timer").innerHTML = twoDigit(days) + ':' + twoDigit(hours) + ':' +
+          twoDigit(minutes) + ':' + twoDigit(seconds);
+        if (distance < 0) {
+          clearInterval(x);
+          document.getElementById("timer").innerHTML = "";
+        }
+      };
+      var startCountdown = function () {
+        // Set the date we're counting down to
+        // Update the count down every 1 second
+        var x = setInterval(function() {
+          tick();
+        }, 1000);
+      };
+      tick();
+      startCountdown();
+    </script>
   <script>
   (function (w,i,d,g,e,t,s) {w[d] = w[d]||[];t= i.createElement(g);
     t.async=1;t.src=e;s=i.getElementsByTagName(g)[0];s.parentNode.insertBefore(t, s);
