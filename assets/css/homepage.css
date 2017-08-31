@@ -1,153 +1,12 @@
-html, body {
-  height: 100%;
-}
-
 body {
   background-image: url("../img/bg-hue.png");
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: cover;
+  /*opacity: 0.58;*/
   z-index: 3;
   background-color: black;
 }
-
-
-.bet-text {
-  font-size: 22px;
-  font-family: "Monda";
-  color: rgb(255, 254, 254);
-  text-transform: uppercase;
-  line-height: 1.2;
-  font-weight: 400;
-  text-align: left;
-  margin-bottom: 40px;
-  margin-top: 40px;
-}
-
-.bet-odds-heading {
-  font-size: 22px;
-  font-family: "Monda";
-  color: rgb(255, 254, 254);
-  text-transform: uppercase;
-  line-height: 1.6;
-  font-weight: 400;
-  text-align: left;
-}
-
-.bet-odds {
-  font-size: 16px;
-  font-family: "Monda";
-  color: rgb(255, 254, 254);
-  text-transform: uppercase;
-  line-height: 1.6;
-  font-weight: 400;
-  text-align: left;
-  margin-left: -15px; 
-  margin-top: 10px;
-}
-
-.right-border {
- border-right: 1px solid white; 
-}
-
-.bet-odds-right {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-end;
-  font-size: 16px;
-  font-family: "Monda";
-  color: rgb(255, 254, 254);
-  text-transform: uppercase;
-  line-height: 1.6;
-  font-weight: 400;
-  text-align: left;
-  margin-left: -15px;
-  flex-flow: row wrap;
-  margin-top: 10px;
-}
-
-.main-bg {
-  padding-top: 80px;
-}
-
-.fighters {
-    max-height: 500px;
-    height: 100%;
-    width: auto;
-}
-
-.fighters-margin {
-  margin-right: 10px;
-}
-
-.bet-odds-bottom {
-  margin-bottom: 10px;
-}
-
-.line {
-  height: 1px;
-}
-
-@media (max-width: 767px) {
-  .main-bg {
-    padding-top: 20px;
-  }
-
-  .fighters {
-    max-height: 300px;
-    height: 100%;
-    width: auto;
-  }
-
-  .fighters-margin {
-    margin-right: 0px;
-  }
-
-  .bet-odds-right {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-  }
-  .bet-odds-bottom {
-    margin-bottom: 0px;
-  }
-  .bet-odds-heading {
-    font-size: 18px;
-    font-family: "Monda";
-    color: rgb(255, 254, 254);
-    text-transform: uppercase;
-    line-height: 1.2;
-    font-weight: 400;
-    text-align: left;
-  }
-  .bet-odds {
-    font-size: 16px;
-    font-family: "Monda";
-    color: rgb(255, 254, 254);
-    text-transform: uppercase;
-    line-height: 1.2;
-    font-weight: 400;
-    text-align: left;
-    
-  }
-  .bet-odds-right {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    font-size: 16px;
-    font-family: "Monda";
-    color: rgb(255, 254, 254);
-    text-transform: uppercase;
-    line-height: 1.2;
-    font-weight: 400;
-    text-align: left;
-  }
-  .bet-text {
-    margin-top: 30px;
-    margin-bottom: 30px;
-  }
-}
-
 
 .hue-background {
   background-repeat: no-repeat;
@@ -161,14 +20,6 @@ body {
   .hue-background {
     background: transparent;
     background-image: none;
-  }
-
-  .right-border {
-    border-right: 0px; 
-  }
-
-  .bet-odds-right {
-    justify-content: flex-start;
   }
 }
 
@@ -193,88 +44,38 @@ body {
 }
 
 .btn-primary {
-  width: 40%;
-  border-width: 1px;
-  border-color: rgb(255, 255, 255);
+	width: 40%;
+	border-width: 1px;
+ 	border-color: rgb(255, 255, 255);
+  	border-style: solid;
+  	background: none;
+  	border-radius: 20px;
+}
+
+.btn-primary:hover {
+	color: rgb(235, 28, 36);
+	background: none;
+	border-color: rgb(235, 28, 36);
   border-style: solid;
-  background: none;
-  border-radius: 20px;
-}
-
-.btn-primary:hover, .bet-btn:hover, .bet-btn:focus {
-  color: rgb(235, 28, 36);
-  background: none;
-  border-width: 1px;
-  border-color: rgb(235, 28, 36);
-  border-style: solid;
-  outline: none;
-}
-
-.bet-btn {
-  width: 40%;
-  border-radius: 20px;
-  background-color: rgb(235, 28, 36);
-  font-family: "Roboto";
-  color: rgb(255, 254, 254);
-  font-weight: bold;
-  border: 0px;
-  min-width: 100px;
-  border-width: 1px;
-  border-color: rgb(235, 28, 36);
-  border-style: solid;
-}
-
-
-.fighters-bg {
-  background-image: url(../img/fighters.png);
-  background-position: 92% -16%;
-  background-repeat: no-repeat;
-  background-size: 50% auto;
-}
-
-
-.stats-box-container {
-  margin-left: auto;
 }
 
 .stats-box {
-  width: 86px;
-  height: 101px;
-  margin: 0 auto;
-  justify-content: flex-start;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+	width: 86px;
+	height: 101px;
+	margin: 0 auto;
+	align-items: center;
+	justify-content: flex-start;
+	display: flex;
+	flex-direction: column;
 }
 
-
-@media (max-width: 479px) {
-  .fighters-bg {
-      background-position: 120% 27%;
-      background-repeat: no-repeat;
-      background-size: auto 19%;
-  }
-}
-
-@media (min-width: 480px) and (max-width: 1023px) {
-    .fighters-bg {
-      background-position: 106% 14%;
-      background-repeat: no-repeat;
-      background-size: 66% auto;
-  }
-}
-
-@media(max-width: 1023px) {
-  .stats-box-container {
-    margin-left: 0px;
-  }
-
-  .stats-box{
-      margin-bottom: 5px;
-      margin-top: 5px;
+@media(max-width: 767px) {
+	.stats-box{
+			margin-bottom: 5px;
+			margin-top: 5px;
       width: 50%;
     }
-  }
+	}
 
 .stats-icon-profit {
   max-width: 34px;
@@ -285,36 +86,36 @@ body {
 }
 
 .stats-icon-arrow {
-  max-width: 36px;
-  width: 100%;
-  max-height: 44px;
-  height: 100%;
-  margin-top: 8px;
+	max-width: 36px;
+	width: 100%;
+	max-height: 44px;
+	height: 100%;
+	margin-top: 8px;
 }
 .stats-icon-graph {
-  max-width: 58px;
-  width: 100%;
-  max-height: 44px;
-  height: 100%;
-  margin-top: 8px;
+	max-width: 58px;
+	width: 100%;
+	max-height: 44px;
+	height: 100%;
+	margin-top: 8px;
 }
 
 .stats-icon-building {
-  max-width: 48px;
-  width: 100%;
-  max-height: 46px;
-  height: 100%;
-  margin-top: 8px;
+	max-width: 48px;
+	width: 100%;
+	max-height: 46px;
+	height: 100%;
+	margin-top: 8px;
 }
 
 .stats-text {
-  font-size: 24px;
-  font-family: "Monda";
-  color: rgb(235, 28, 36);
-  text-transform: uppercase;
-  line-height: 1;
-  text-align: center;
-  margin-top: 5px;
+	font-size: 24px;
+	font-family: "Monda";
+	color: rgb(235, 28, 36);
+	text-transform: uppercase;
+	line-height: 1;
+	text-align: center;
+	margin-top: 5px;
 }
 
 .stats-sub-text {
@@ -326,21 +127,22 @@ body {
 }
 
 .bk-top-banner {
-  background-image: url(../img/BetKing-bg-top.png);
-  width: 100%;
-  background-repeat: no-repeat;
-  background-position: 0 50%;
-  background-size: cover;
-  margin-top: 0px;
+	background-image: url(../img/BetKing-bg-top.png);
+	width: 100%;
+	background-repeat: no-repeat;
+	background-position: 0 50%;
+	background-size: cover;
+	margin-top: 0px;
   padding-top: 50px;
 }
 
 .tablet-image {
-  width: 611px;
-  height: 415px;
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
-  background-size: contain;
+	width: 611px;
+	height: 415px;
+	/*z-index: 81;*/
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	background-size: contain;
 }
 
 .head-text {
@@ -351,7 +153,7 @@ body {
   line-height: 1.286;
   text-align: left;
   letter-spacing: 2px;
-  font-weight: 700;
+  font-weight: 400;
 }
 
 .countdown-timer {
@@ -421,12 +223,12 @@ body {
 }
 
 .jumbotron {
-  background-color: black;
+	background-color: black;
 }
 
 .btn-primary {
-  margin-bottom: 40px;
-  margin-top: 40px;
+	margin-bottom: 40px;
+	margin-top: 40px;
 }
 
 .section-heading {
@@ -460,8 +262,8 @@ body {
   font-weight: 300;
 }
 
-.section-links a{
-  font-size: 12px;
+.section-links {
+  font-size: 14px;
   font-family: "Roboto";
   color: rgb(203, 203, 203);
   text-decoration: underline;
@@ -470,11 +272,13 @@ body {
   padding-left: 0px;
   padding-right: 0px;
   font-weight: 300;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
-.section-links a:hover {
-  color: rgb(235, 28, 36);
-  background: none;
+.section-links:hover {
+	color: rgb(235, 28, 36);
+	background: none;
 }
 
 .navbar .navbar-nav .nav-link-text {
@@ -495,11 +299,11 @@ body {
 }
 
 .form-inline .nav-link.fa {
-  font-size: 25px;
+	font-size: 25px;
 }
 
 .form-inline{
-  margin-left: 60px;
+	margin-left: 60px;
 }
 
 @media(max-width: 767px) {
@@ -508,6 +312,7 @@ body {
   }
   .nav-item {
     background-color: black;
+  /*opacity: 0.788;*/
   }
 
   .form-inline, .form-inline ul{
@@ -530,20 +335,22 @@ body {
 
 .navbar.navbar-toggleable-md, .dropdown-menu {
   background-color: rgb(16, 16, 16);
-  opacity: 0.788;
+  /* opacity: 0.788; */
   height: 50px;
+  /*z-index: 432;*/
   background-image: url("../img/top-banner.png");
 }
 
 .dropdown-menu {
-  position: absolute;
-  top: 46px;
-  left: 0px;
+	position: absolute;
+	top: 46px;
+	left: 0px;
 }
 
 
  .dropdown-item.nav-link-text {
-    background-color: rgb(16, 16, 16);
+	  background-color: rgb(16, 16, 16);
+	  /*opacity: 0.788;*/
   }
 
 
@@ -565,8 +372,8 @@ body {
 }
 
 .accordion-heading:hover {
-  text-decoration: none;
-  color: rgb(222, 221, 221);
+	text-decoration: none;
+	color: rgb(222, 221, 221);
 }
 
 .accordion-content {
@@ -577,7 +384,7 @@ body {
 }
 
 .flex-start {
-  display: flex;
+	display: flex;
   align-items: center;
   justify-content: flex-start;
 }
@@ -694,7 +501,7 @@ body {
 
 
 .subscription-box button {
-  
+	
   font-size: 14px;
   font-family: "Roboto";
   color: rgb(222, 221, 221);
@@ -815,11 +622,14 @@ body {
   outline: none;
 }
 
+
+
 .flex-end {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
+
 
 .accordion-rect {
   background-color: rgba(255, 255, 255, 0.102);
@@ -839,7 +649,7 @@ body {
   width: 100%;
 }
 
-@media(max-width: 767px) {
+@media(max-width: 767px){
   .footer-bg .block {
     display: flex;
     align-items: center;
@@ -847,7 +657,6 @@ body {
     text-align: center;
   }
 }
-
 @media(max-width: 767px) {
   .footer-bg .block .flex-end {
     display: flex;
@@ -881,7 +690,6 @@ body {
   font-family: "Monda";
   line-height: 1.6;
   text-transform: uppercase;
-  margin-top: 40px;
 }
 
 
@@ -952,20 +760,4 @@ body {
   border-left: .5em solid transparent;
   margin-bottom: 0.1rem;
   margin-left: 0.8em;
-}
-
-
-.date-text {
-  color: rgb(255, 255, 255);
-  font-size: 16px;
-  font-weight: 400;
-  font-family: "Monda";
-  line-height: 1.6;
-  text-transform: uppercase;
-}
-
-.flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
