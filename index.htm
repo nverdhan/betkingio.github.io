@@ -7,76 +7,6 @@
       <meta name="author" content="">
       <link rel="icon" href="favicon.ico">
       <title>BetKing.io - ICO</title>
-      <script type="text/javascript">
-          var CONSTANTS = {
-            icoStartDate: new Date(new Date(Date.UTC(2017, 7, 7, 0, 0, 0))).getTime(),
-            icoEndDate: new Date(new Date(Date.UTC(2017, 8, 4, 0, 0, 0))).getTime()
-          }
-          var currencies = [
-            {value: 0, symbol: '฿', code: 'BTC'},
-            {value: 1, symbol: 'E', code: 'ETH'},
-            {value: 3, symbol: 'L', code: 'LTC'},
-          ];
-          var api = "https://ico.betking.io";
-
-          var HTML_LOADED = false;
-          var FUNDS = [];
-          var EXCHANGE_RATES = [];
-
-          function showCurrencies () {
-            if (FUNDS.length > 0 && EXCHANGE_RATES.length > 0 && HTML_LOADED) {
-              var total = 0;
-              currencies.forEach(function (c) {
-                var el = document.getElementById('presale-' + c.code);
-                var amount = FUNDS.find(f => f.currency === c.value);
-                var exchangeRate = EXCHANGE_RATES.find(r => r.value === c.value);
-                if (el && amount && amount.funds && exchangeRate) {
-                  el.innerHTML = addCommas(amount.funds);
-                  total+=amount.funds * exchangeRate.last_price;
-                }
-              });
-              document.getElementById('presale-total').innerHTML = '<span style="color:#eb1c24">USD ' + addCommas(total.toFixed(2)) + '</span>';
-            }
-          }
-          var addCommas = (x) => {
-            if (parseFloat(x) === 0) {
-              return 0;
-            }
-            var parts = x.toString().split('.');
-            return `${parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')}.${parts[1]}`;
-          };
-        (function () {
-          var fetchCurrencyRates = function () {
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == XMLHttpRequest.DONE) {
-                  EXCHANGE_RATES = JSON.parse(xhr.responseText);
-                  showCurrencies();
-                }
-            }
-            var timestamp = Date.now();
-            xhr.open('GET', api+'/api/bk/currency-exchange-rates?timestamp=' + timestamp, true);
-            xhr.send(null);
-          };
-          var twoDigit = function (n) {
-            return ("0" + n).slice(-2);
-          };
-          var fetchFunds = function () {
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-              if (xhr.readyState == XMLHttpRequest.DONE) {
-                FUNDS = JSON.parse(xhr.responseText);
-                showCurrencies();
-              }
-            }
-            var timestamp = Date.now();
-            xhr.open('GET', api+'/api/bk/funds-raised?timestamp=' + timestamp, true);
-            xhr.send(null);
-          };
-          fetchCurrencyRates();
-          fetchFunds();
-        })();
-      </script>
       <link href="assets/css/bootstrap.css" rel="stylesheet">
       <!-- <link href="index.css" rel="stylesheet"> -->
       <link rel="stylesheet" href="assets/css/font-awesome-4.7.0/css/font-awesome.min.css">
@@ -168,7 +98,7 @@
                 <div class="head-text"> Join the <span style="color:#eb1c24">ICO</span> of the casino that profited <b>7400</b> Bitcoin</div>
               </div>
               <div class="row col-md-8">
-                <div class="countdown-timer"> ICO ENDS IN : <span style="color:#eb1c24"><b id="timer"></b></span></div>
+                <div class="countdown-timer">ICO Ended</div>
               </div>
               <div class="row col-md-8">
                 <div class="col-md-12 row pre-sale-heading"> FUNDS RAISED </div>
@@ -194,17 +124,17 @@
                       <div style="color:#eb1c24" id="presale-LTC" class="presale-currency__data__amount">0</div>
                     </div>
                     </div>
-                  <div class="col-md-12 row pre-sale-total"> Total: <div style="color:#eb1c24; margin-left: 10px;" id="presale-total"></div> </div>
+                  <div class="col-md-12 row pre-sale-total"> Total:
+                    <div style="color:#eb1c24; margin-left: 10px;" id="presale-total">
+                      USD 5,194,288.00
+                    </div>
+                  </div>
         
                 </div>
-                <script type="text/javascript">
-                  HTML_LOADED = true;
-                  showCurrencies();
-                </script>
               </div>
                       <br>
               <div class="row col-md-6"> 
-                <a href="https://ico.betking.io/register" class="btn btn-primary">JOIN NOW</a>
+                <a href="https://ico.betking.io/login" class="btn btn-primary">LOGIN</a>
               </div>
                       <br>
                       <br>
@@ -638,35 +568,6 @@
         }
         closeNavBarOnClick();
       });
-    </script>
-    <script type="text/javascript">
-      var countDownDate = CONSTANTS.icoEndDate;
-      var twoDigit = function (n) {
-        return ("0" + n).slice(-2);
-      };
-      var tick = function(){
-        var now = new Date().getTime();
-        var distance = countDownDate - now;
-        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        document.getElementById("timer").innerHTML = twoDigit(days) + ':' + twoDigit(hours) + ':' +
-          twoDigit(minutes) + ':' + twoDigit(seconds);
-        if (distance < 0) {
-          clearInterval(x);
-          document.getElementById("timer").innerHTML = "";
-        }
-      };
-      var startCountdown = function () {
-        // Set the date we're counting down to
-        // Update the count down every 1 second
-        var x = setInterval(function() {
-          tick();
-        }, 1000);
-      };
-      tick();
-      startCountdown();
     </script>
   <script>
   (function (w,i,d,g,e,t,s) {w[d] = w[d]||[];t= i.createElement(g);
